@@ -1,14 +1,16 @@
 
-function setCSS (css) {
+function setCSS (css) {//добаляем кастомный css  в DOM
 	const style = document.createElement('style');
 	style.innerHTML = css;
 	document.head.appendChild(style);
 }
-function getRandom(min, max) {
+function getRandom(min, max) {//генератор рандомных чисел
 	let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
 class TimerControl {
+	//класс, отвечающий за таймер, сделан с помощью паттерна observer
+	//после подписки на события subscribeOn.....() класс оповещает всех подписчиков
 	constructor(){
 		this.subscribersOnTick = [];
 		this.subscribersOnPause = [];
@@ -58,29 +60,29 @@ class TimerControl {
 			this.stop();
 		}
 	}
-	stop(){
+	stop(){//выключает таймер
 		clearInterval(this.timer);
 		this.notifyOnStop()
 	}
-	start(time=60){
+	start(time=60){//включает, или заного перезапускает таймер
 		this.timer = setInterval(this.notifyOnTick.bind(this), 1000);
 		this.timeLeft=time;
 	}
-	pause(){
+	pause(){//ставит таймер  на паузу
 		clearInterval(this.timer);
 		this.notifyOnPause();
 		
 	}
-	resume(){
+	resume(){//продолжает работу таймера
 		this.timer = setInterval(this.notifyOnTick.bind(this), 1000);
 		this.notifyOnResume(this.timeLeft);
 	}
 }
 
 
-class eventObserver{}
 
 class Modal{
+	//класс инкапсулирует методы работы с модальным окном
 	constructor(modalclass, okbtn, callBack){
 		this.$modalclass = document.querySelector(modalclass);
 		this.$okbtn = document.querySelector(okbtn);
@@ -89,18 +91,20 @@ class Modal{
 		this.$closebuttons.forEach((val)=>{val.onclick = this.close.bind(this);})
 		this.$modalclass.onclick = this.close.bind(this);
 		this.$values = false;
-		this.closeEvent = callBack;
+		this.closeEvent = callBack;//функция обработчик закрытия окна  кнопкой сохранить
 		
 		
 	}
+	//создает модальное окно. v - текст сообщения
 	open(v){
 		this.$modalclass.classList.remove("hide");
 		document.getElementsByName('score')[0].value  = v;
 		console.log(document.getElementsByName('score')[0]);
 		
 	}
-	close(e){
+	close(e){// обработчик закрытия модального окна
 		if(e.target.closest('.modal-dialog') && (e.target.closest('[data-dismiss]')==null)){
+			//если клик произошел в области окна,  то окно не закрыаем
 			return;
 		}
 		if (e.target == this.$okbtn){
