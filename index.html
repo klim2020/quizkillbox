@@ -16,14 +16,15 @@
 		<div class="panel bg-light row">
 			<div class="controls col-sm-4">
 				<div class="row bg-light">
-					<button class="start-btn col-sm-4 btn btn-primary" disabled>Пауза</button>
-					<button class="new-game-btn col-sm-4 btn btn-primary">Новая игра</button>
+					<button class="start-btn col-sm-4 btn btn-success" disabled>Пауза</button>
+					<button class="new-game-btn col-sm-4 btn btn-success">Новая игра</button>
+					
 				</div>
 			</div>
 			<div class="indicators col-sm-5">
 				<div class="row">
-					<div class="time-counter col-sm-4 offset-1 badge badge-secondary">1:00</div>
-					<div class="current-score col-sm-5 badge badge-secondary">0</div>
+					<div class="time-counter col-sm-4 offset-1 badge badge-info">1:00</div>
+					<div class="current-score col-sm-5 badge badge-info">0</div>
 				</div>
 			</div>
 			<div class="rules col-sm-3 center">
@@ -37,14 +38,12 @@
 			<div class="score-table col-sm-3 ">
 				<div class="title">Top Players</div>
 				<ul>
-					<li>
-						<span class="name"></span><span class="score"></span>
-					</li>
+				
 				</ul>
 			</div>
 		</div>
 	</div>
-	<div class="modal hide" tabindex="-1" role="dialog">
+	<div class="modal hide" id="exampleModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 		  <div class="modal-content">
 			<div class="modal-header">
@@ -54,11 +53,14 @@
 			  </button>
 			</div>
 			<div class="modal-body">
-			  <p>Modal body text goes here.</p>
+			<p>name</p>
+			<input  type="text" name="name">
+			<p>score</p>
+			<input  type="text" name="score" disabled>
 			</div>
 			<div class="modal-footer">
-			  <button type="button" class="btn btn-primary">Save changes</button>
-			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			  <button type="button" class="btn btn-primary" data-dismiss="modal" id="okbtn">Save changes</button>
+			  <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
 			</div>
 		  </div>
 		</div>
